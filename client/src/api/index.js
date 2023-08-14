@@ -9,4 +9,8 @@ API.interceptors.request.use(req=>{
 export const login=(authData)=>API.post('/user/login',authData);
 
 export const updateChannelData=(id,updateData)=>API.patch(`/user/update/${id}`,updateData);
+
 export const fetchAllChannel=()=>API.get('/user/getAllChannels');
+
+export const uploadVideo=(fileData, fileOptions)=>API.post('/video/uploadVideo',fileData, fileOptions);
+export const getVideos = ()=>API.get('/video/getvideos');

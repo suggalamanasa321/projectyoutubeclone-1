@@ -1,16 +1,23 @@
 import React from 'react'
-import vid from '../../components/Video/vid.mp4'
+// import vid from '../../components/Video/vid.mp4'
 import './VideoPage.css'
 import LikeWatchLaterSaveBtns from './LikeWatchLaterSaveBtns';
 import Comments from '../../components/Comments/Comments';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function VideoPage() {
+    const {vid}=useParams();
+    // console.log(vid)
+    const vids = useSelector((state) => state.videoReducer);
+    console.log(vids)
+    const vv=vids.data.filter((q)=>q._id === vid)[0];
     return (
         <>
             <div className="container_VideoPage">
                 <div className="container2_VideoPage">
                     <div className='video_display_screen_videoPage'>
-                        <video src={vid}
+                        <video src={`http://localhost:5500/${vv.filePath}`}
                             className={"video_ShowVideo_videoPage"}
                             controls
                         // autoPlay

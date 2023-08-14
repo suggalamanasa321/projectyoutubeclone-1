@@ -10,30 +10,45 @@ import { useState } from 'react';
 import CreateEditChannel from './pages/Channel/CreateEditChannel';
 import { useDispatch } from 'react-redux';
 import { fetchAllChannel } from './actions/channelUser';
+import VideoUpload from './pages/VideoUpload/VideoUpload';
+import { getAllVideo } from './actions/video';
+
+
+// import { FaLiraSign } from 'react-icons/fa';
 
 function App() {
   const dispatch=useDispatch();
+
   useEffect(()=>{
     dispatch(fetchAllChannel());
-  },[dispatch])
+    dispatch(getAllVideo());
+  },[dispatch]);
+
   const[toggleDrawerSidebar, setToggleDrawerSidebar]=useState({
-    display:'none'
-  })
+    display:'none',
+  });
+
   const toggleDrawer=()=>{
     if(toggleDrawerSidebar.display==='none'){
       setToggleDrawerSidebar({
-        display:'flex'
-      })
+        display:'flex',
+      });
     }else{
       setToggleDrawerSidebar({
-        display:'none'
-      })
+        display:'none',
+      });
 
     }
-  }
+  };
+
+const[vidUploadPage, setvidUploadPage]=useState(false)
 const[EditCreateChannelBtn, setEditCreateChannelBtn]=useState(false)
   return (
     <Router>
+      {
+        vidUploadPage && <VideoUpload setvidUploadPage={setvidUploadPage} />
+      }
+      
       {
         EditCreateChannelBtn && <CreateEditChannel setEditCreateChannelBtn={setEditCreateChannelBtn}/>
       }  
@@ -47,7 +62,7 @@ const[EditCreateChannelBtn, setEditCreateChannelBtn]=useState(false)
         toggleDrawerSidebar={toggleDrawerSidebar}
         />
       
-      <AllRoutes setEditCreateChannelBtn={setEditCreateChannelBtn}/>
+      <AllRoutes setvidUploadPage={setvidUploadPage} setEditCreateChannelBtn={setEditCreateChannelBtn}/>
 
     </Router>
 

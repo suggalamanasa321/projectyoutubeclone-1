@@ -11,7 +11,7 @@ export const login=(authData)=>async(dispatch)=>{
 
 
     }catch(error){
-        alert(error)
+        alert(error);
 
     }
-}
+};
