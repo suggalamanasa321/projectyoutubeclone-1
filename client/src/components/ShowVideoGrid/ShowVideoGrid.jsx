@@ -10,19 +10,17 @@ function ShowVideoGrid({ vids }) {
   return (
     <div className='container_showVideoGrid'>
       {
-        vids.map((vi) =>
-        (
+        vids.reverse().map(vi =>
+        {
+          return(
           <div key={vi._id} className="video_box_app">
             <ShowVideo vid={vi} />
           </div>
-
-
-        )
-        )}
-
-
+          )
+          })
+      }
     </div>
-  );
+  )
 
 }
 

@@ -9,13 +9,13 @@ import { Link } from 'react-router-dom'
 function Auth({ User, setAuthBtn, setEditCreateChannelBtn }) {
     const dispatch = useDispatch();
     const onLogoutSuccess = () => {
-        dispatch(setCurrentUser(null))
+        dispatch(setCurrentUser(null));
         alert("Log out succesful");
-    }
+    };
     return (
         <div className='Auth_container' onClick={() => setAuthBtn(false)}>
             <div className='Auth_container2'>
-                <p className='User_Details'>
+                <div className='User_Details'>
                     <div className='channel_logo_App'>
                         <p className='fstChar_logo_App'>
                             {
@@ -28,19 +28,19 @@ function Auth({ User, setAuthBtn, setEditCreateChannelBtn }) {
 
                     </div>
                     <div className='email_Auth'>{User.result.email}</div>
-                </p>
+                </div>
                 <div className='btns_Auth'>
                     {
-                        User.result.name ? <>
+                        User.result.name ? (<>
                             {
                                 <Link to={`/channel/${User.result._id}`} className='btn_Auth'>
                                     Your channel
 
                                 </Link>
                             }
-                        </> : <>
+                        </>) : (<>
                             <input type="submit" className='btn_Auth' value="Create Your Channel" onClick={()=>setEditCreateChannelBtn(true)} />
-                        </>
+                        </>)
 
                     }
 
@@ -63,7 +63,7 @@ function Auth({ User, setAuthBtn, setEditCreateChannelBtn }) {
             </div>
 
         </div>
-    )
+    );
 }
 
-export default Auth
+export default Auth;

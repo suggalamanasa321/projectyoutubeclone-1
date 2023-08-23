@@ -2,54 +2,53 @@ import React, { useState } from 'react'
 import './VideoUpload.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadVideo } from '../../actions/video';
-// import { BiFontSize } from 'react-icons/bi'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 
 function VideoUpload({ setvidUploadPage }) {
     const CurrentUser = useSelector((state) => state.currentUserReducer);
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('')
-    const [videoFile, setVideoFile] = useState('')
+    const [title, setTitle] = useState('');
+    const [videoFile, setVideoFile] = useState('');
+
     const handleSetVideoFile = (e) => {
         setVideoFile(e.target.files[0]);
-
     }
-    const [progress, setProgress] = useState(0)
+    const [progress, setProgress] = useState(0);
 
     const fileOptions = {
         onUploadProgress: (ProgressEvent) => {
             const { loaded, total } = ProgressEvent;
             const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
-            setProgress(percentage)
+            setProgress(percentage);
             if (percentage === 100) {
-                setTimeout(function () { }, 3000)
+                setTimeout(function () { }, 3000);
                 setvidUploadPage(false);
             }
-        }
+        },
 
-    }
+    };
     const uploadVideoFile = () => {
         if (!title) {
             alert('plz enter the title of the video')
         } else if (!videoFile) {
             alert("plz attach a video file")
-        } else if (videoFile.size < 1000000) {
-            alert("Plz attach a video fil less than 1kb")
+        } else if (videoFile.size > 1000000) {
+            alert("Plz attach a video file less than 1kb")
 
         } else {
                 const fileData = new FormData();
                 fileData.append('file', videoFile);
                 fileData.append('title', title);
-                fileData.append('channel', CurrentUser && CurrentUser.result && CurrentUser.result._id);
-                fileData.append('uploader', CurrentUser && CurrentUser.result && CurrentUser.result.name);
+                fileData.append('channel', CurrentUser.result._id);
+                fileData.append('uploader', CurrentUser.result.name);
                 // console.log(videoFile)
 
                 dispatch(uploadVideo({
                     fileData: fileData,
                     fileOptions: fileOptions,
-                }))
+                }));
             }
-        }
+        };
 
 
         return (
@@ -114,4 +113,4 @@ function VideoUpload({ setvidUploadPage }) {
     }
 
 
-export default VideoUpload
+export default VideoUpload;

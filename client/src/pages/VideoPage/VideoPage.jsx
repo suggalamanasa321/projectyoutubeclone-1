@@ -1,17 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import vid from '../../components/Video/vid.mp4'
 import './VideoPage.css'
 import LikeWatchLaterSaveBtns from './LikeWatchLaterSaveBtns';
 import Comments from '../../components/Comments/Comments';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import {Link, useParams} from 'react-router-dom';
+import { addToHistory } from '../../actions/History';
+import { viewVideo } from '../../actions/video';
 function VideoPage() {
     const {vid}=useParams();
     // console.log(vid)
+    // const channels = useSelector((state) => state.channelReducers);
+    // const currentChannel = channels.filter((c) => c._id === vid)[0] || {};
+
+
     const vids = useSelector((state) => state.videoReducer);
-    console.log(vids)
-    const vv=vids.data.filter((q)=>q._id === vid)[0];
+    // console.log(vids)
+    const vv = vids.data ? vids.data.filter((q) => q._id === vid)[0] : {};
+    const dispatch = useDispatch();
+    const CurrentUser = useSelector((state) => state.currentUserReducer);
+
+    const handleHistory=()=>{
+        dispatch(
+            addToHistory(
+                {
+                  videoId: vid,
+                  Viewer: CurrentUser.result._id,
+                }
+            )
+        );
+    };
+    const handleViews=()=>{
+        dispatch(viewVideo({
+            id:vid
+        }))
+
+
+    }
+    useEffect(()=>{
+        if(CurrentUser){
+        handleHistory();
+        }
+        handleViews();
+    },[]);
     return (
         <>
             <div className="container_VideoPage">
@@ -24,26 +56,27 @@ function VideoPage() {
                         ></video>
                         <div className='video_details_VideoPage'>
                             <div className='video_btns_title_VideoPage_cont'>
-                                <p className='video_title_VideoPage'>Title</p>
+                                <div className='video_title_VideoPage'>{vv.videoTitle}</div>
                                 <div className='views_date_btns_VideoPage'>
                                     <div className='views_VideoPage'>
-                                        5 views <div className="dot"></div> uploaded 1 year ago
+                                        {vv.Views} views <div className="dot"></div>{" "} uploaded {moment(vv.createdAt).fromNow()}
                                     </div>
-                                    <LikeWatchLaterSaveBtns/>
-                                </div>
+                                    <LikeWatchLaterSaveBtns vv={vv} vid={vid}/>
+                                </div> 
                             </div>
                                 
-                            <div className='channel_details_VideoPage'>
+                            <Link to={`/channel/${vv.videoChannel}`} className='channel_details_VideoPage'>
                                 <b className='channel_logo_VideoPage'>
-                                    <p>C</p>
+                                <p>{vv.Uploader.charAt(0).toUpperCase()}</p>
+                                {/* <p>C</p> */}
                                 </b>
-                                <p className='channel_name_videoPage'>Channel name</p>
-                            </div>
+                                <p className='channel_name_videoPage'>{vv.Uploader}</p>
+                            </Link>
                             <div className='comments_VideoPage'>
                                 <h2>
                                     <u>Comments</u>
                                 </h2>
-                                <Comments/>
+                                <Comments videoId={vv._id}/>
                             </div>
 
 
@@ -57,7 +90,7 @@ function VideoPage() {
             </div>
 
         </>
-    )
+    );
 }
 
 export default VideoPage; 

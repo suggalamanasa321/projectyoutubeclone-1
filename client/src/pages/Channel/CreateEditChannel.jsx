@@ -27,7 +27,8 @@ function CreateEditChannel({ setEditCreateChannelBtn }) {
       dispatch(updateChannelDate(CurrentUser.result._id, {
         name: name,
         desc: desc,
-      }));
+      })
+      );
       setEditCreateChannelBtn(false);
       setTimeout(() => {
         dispatch(login({ email: CurrentUser.result.email }));
@@ -35,7 +36,7 @@ function CreateEditChannel({ setEditCreateChannelBtn }) {
 
     }
 
-  }
+  };
   return (
     <div className='container_CreateEditChannel'>
       <input type="submit" name='text' value={"X"} className='ibtn_x' onClick={()=>setEditCreateChannelBtn(false)} />
@@ -45,13 +46,13 @@ function CreateEditChannel({ setEditCreateChannelBtn }) {
           Your Channel
         </h1>
         <input type="text" name='text' placeholder='Enter Your/Channel name' className='ibox' value={name} onChange={(e)=>setName(e.target.value)} />
-        <textarea type='text' rows={15} placeholder={"Enter channel description"} className={'ibox'} value={desc} onChange={(e)=>setDesc(e.target.value)} />
+        <textarea type='text' rows={15} placeholder={"Enter channel Description"} className={'ibox'} value={desc} onChange={(e)=>setDesc(e.target.value)} />
         <input type="submit" value={"submit"} className='ibtn' onClick={handleSubmit} />
 
       </div>
 
     </div>
-  )
+  );
 }
 
-export default CreateEditChannel
+export default CreateEditChannel;

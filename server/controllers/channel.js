@@ -10,9 +10,9 @@ export const updateChannelData=async(req,res)=>{
     try {
         const updateData=await users.findByIdAndUpdate(_id,{
             $set:{
-                'name':name,'desc':desc
-            }
-        },{new:true})
+                'name':name,'desc':desc,
+            },
+        },{new:true});
         res.status(200).json(updateData)
     } catch (error) {
         console.log(error)
@@ -22,9 +22,10 @@ export const updateChannelData=async(req,res)=>{
 export const getAllChannels=async(req, res)=>{
     try {
         const allChannels=await users.find();
-        const allChannelsDetails=[]
+
+        const allChannelsDetails=[];
         allChannels.forEach((channel)=>{
-            allChannelsDetails.push({_id:channel._id,name:channel.name,email:channel.email,dsc:channel.desc});
+            allChannelsDetails.push({_id:channel._id,name:channel.name,email:channel.email,desc:channel.desc});
         });
         res.status(200).json(allChannelsDetails);
     } catch (error) {

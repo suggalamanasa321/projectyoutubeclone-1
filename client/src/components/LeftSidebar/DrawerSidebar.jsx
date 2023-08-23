@@ -4,7 +4,8 @@ import { AiFillLike, AiFillPlaySquare, AiOutlineHome } from 'react-icons/ai'
 import { MdOutlineExplore, MdOutlineVideoLibrary, MdOutlineWatchLater, MdSubscriptions } from 'react-icons/md';
 import { FaHistory } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom'
-import shorts from './short.png'
+import shorts from './short.png';
+
 function DrawerSidebar({toggleDrawer, toggleDrawerSidebar}) {
     return (
         <div className='container_DrawerLeftSidebar' style={toggleDrawerSidebar}>
@@ -28,7 +29,7 @@ function DrawerSidebar({toggleDrawer, toggleDrawerSidebar}) {
                         <p>
 
                             <img src={shorts} width={22} className={'icon_sidebar'} style={{ margin: "auto 0.7rem" }} />
-                            <div className="text_sidebar_icon">shorts</div>
+                            <div className="text_sidebar_icon">Shorts</div>
                         </p>
                     </div>
                     <div className="icon_sidebar_div">
@@ -38,11 +39,8 @@ function DrawerSidebar({toggleDrawer, toggleDrawerSidebar}) {
                             <div className="text_sidebar_icon">Subscriptions</div>
                         </p>
                     </div>
-                    
-                
-
-
                 </div>
+
                 <div className="libraryBtn_Drawerleftsidebar">
                     <NavLink to={'/library'} className="icon_sidebar_div">
                         <p>
@@ -62,7 +60,7 @@ function DrawerSidebar({toggleDrawer, toggleDrawerSidebar}) {
                         <p>
 
                             <AiFillPlaySquare size={22} className={'icon_sidebar'} style={{ margin: "auto 0.7rem" }} />
-                            <div className="text_sidebar_icon"> Your Videos</div>
+                            <div className="text_sidebar_icon">Your Videos</div>
                         </p>
                     </NavLink>
                     <NavLink to={'/watchlater'} className="icon_sidebar_div">
@@ -82,7 +80,15 @@ function DrawerSidebar({toggleDrawer, toggleDrawerSidebar}) {
 
                 </div>
                 <div className="subscriptions_lsdbar">
-                    <h3>Your subscriptions</h3>
+                    <h3>Your Subscriptions</h3>
+                    <div className="channel_lsdbar">
+                        <p>C</p>
+                        <div>Channel</div>
+                    </div>
+                    <div className="channel_lsdbar">
+                        <p>C</p>
+                        <div>Channel</div>
+                    </div>
                     <div className="channel_lsdbar">
                         <p>C</p>
                         <div>Channel</div>
@@ -100,6 +106,6 @@ function DrawerSidebar({toggleDrawer, toggleDrawerSidebar}) {
             </div>
         </div>
     );
-};
+}
 
 export default DrawerSidebar;

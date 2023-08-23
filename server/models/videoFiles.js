@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 const videoFileSChema = new mongoose.Schema({
     videoTitle: {
         type:String,
@@ -37,7 +37,7 @@ const videoFileSChema = new mongoose.Schema({
     },
 },
     {
-        timestamps:true
+        timestamps:true,
     }
 
 );

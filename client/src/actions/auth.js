@@ -8,8 +8,6 @@ export const login=(authData)=>async(dispatch)=>{
         const {data} = await api.login(authData);
         dispatch({type:"AUTH",data});
         dispatch(setCurrentUser(JSON.parse(localStorage.getItem('Profile'))))
-
-
     }catch(error){
         alert(error);
 

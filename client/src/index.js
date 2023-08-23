@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from  'react-redux';
 import {applyMiddleware, compose} from 'redux'
-// import { MdPodcasts } from 'react-icons/md';
 import {createStore} from 'redux'
 import thunk from 'redux-thunk'
 import Reducers from './Reducers';

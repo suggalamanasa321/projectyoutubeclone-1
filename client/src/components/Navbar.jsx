@@ -15,18 +15,16 @@ import { useState } from "react";
 
 function Navbar({ toggleDrawer, setEditCreateChannelBtn }) {
   const [AuthBtn, setAuthBtn] = useState(false);
+  const CurrentUser = useSelector((state) => state.currentUserReducer);
 
   //  const CurrentUser = null;
-
   // const CurrentUser = {
   //     result: {
   //         email: 'xyz@gmail.com',
   //         joinedOn: '2222-07-IST09:57:23.4892',
   //     },
   // };
-
-  const CurrentUser = useSelector((state) => state.currentUserReducer);
-  // console.log(CurrentUser);
+  console.log(CurrentUser);
 
   useEffect(() => {
     function start() {
@@ -86,8 +84,7 @@ function Navbar({ toggleDrawer, setEditCreateChannelBtn }) {
             <>
               <div
                 className="channel_logo_App"
-                onClick={() => setAuthBtn(true)}
-              >
+                onClick={() => setAuthBtn(true)}>
                 <p className="fstChar_logo_App">
                   {CurrentUser.result.name ? (
                     <>{CurrentUser.result.name.charAt(0).toUpperCase()}</>
@@ -116,7 +113,8 @@ function Navbar({ toggleDrawer, setEditCreateChannelBtn }) {
           )}
         </div>
       </div>
-      {AuthBtn && (
+      {
+      AuthBtn && (
         <Auth
           setEditCreateChannelBtn={setEditCreateChannelBtn}
           setAuthBtn={setAuthBtn}

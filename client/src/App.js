@@ -1,9 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router
-} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import AllRoutes from './components/AllRoutes';
 import DrawerSidebar from './components/LeftSidebar/DrawerSidebar';
 import { useState } from 'react';
@@ -12,9 +10,10 @@ import { useDispatch } from 'react-redux';
 import { fetchAllChannel } from './actions/channelUser';
 import VideoUpload from './pages/VideoUpload/VideoUpload';
 import { getAllVideo } from './actions/video';
+import { getAlllikedVideo } from './actions/likedVideo';
+import { getAllwatchLater } from './actions/watchLater';
+import { getAllHistory } from './actions/History';
 
-
-// import { FaLiraSign } from 'react-icons/fa';
 
 function App() {
   const dispatch=useDispatch();
@@ -22,6 +21,9 @@ function App() {
   useEffect(()=>{
     dispatch(fetchAllChannel());
     dispatch(getAllVideo());
+    dispatch(getAlllikedVideo());
+    dispatch(getAllwatchLater());
+    dispatch(getAllHistory());
   },[dispatch]);
 
   const[toggleDrawerSidebar, setToggleDrawerSidebar]=useState({
@@ -41,8 +43,8 @@ function App() {
     }
   };
 
-const[vidUploadPage, setvidUploadPage]=useState(false)
-const[EditCreateChannelBtn, setEditCreateChannelBtn]=useState(false)
+const[vidUploadPage, setvidUploadPage]=useState(false);
+const[EditCreateChannelBtn, setEditCreateChannelBtn]=useState(false);
   return (
     <Router>
       {
@@ -50,17 +52,17 @@ const[EditCreateChannelBtn, setEditCreateChannelBtn]=useState(false)
       }
       
       {
-        EditCreateChannelBtn && <CreateEditChannel setEditCreateChannelBtn={setEditCreateChannelBtn}/>
-      }  
+        EditCreateChannelBtn && (<CreateEditChannel setEditCreateChannelBtn={setEditCreateChannelBtn}/>
+      )}  
       <Navbar
       setEditCreateChannelBtn={setEditCreateChannelBtn}
       toggleDrawer={toggleDrawer}
        />
       
-        <DrawerSidebar
+      <DrawerSidebar
         toggleDrawer={toggleDrawer}
         toggleDrawerSidebar={toggleDrawerSidebar}
-        />
+      />
       
       <AllRoutes setvidUploadPage={setvidUploadPage} setEditCreateChannelBtn={setEditCreateChannelBtn}/>
 

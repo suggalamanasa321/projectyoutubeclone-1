@@ -17,7 +17,7 @@ function ShowVideo({ vid }) {
             <div className='video_description'>
                 <div className="channel_logo_App">
                     <div className='fstChar_logo_App'>
-                        <>{vid && vid.Uploader ? vid.Uploader.charAt(0) : null}</>
+                        <>{vid.Uploader && vid.Uploader.charAt(0).toUpperCase()}</>
                     </div>
 
                 </div>
@@ -25,7 +25,7 @@ function ShowVideo({ vid }) {
                     <p className='title_video_ShowVideo'>{vid.videoTitle}</p>
                     <pre className='vid_view_UploadTime'>{vid.Uploader}</pre>
                     <pre className='vid_view_UploadTime'>
-                        {vid.Views} <span className='dot'></span> uploaded {moment(vid.createdAt).fromNow()} 
+                        {vid.Views} views <span className='dot'></span> {moment(vid.createdAt).fromNow()} 
                     </pre>
 
                 </div>
